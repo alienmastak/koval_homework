@@ -1,0 +1,261 @@
+public class Main {
+
+    public static void main(String[] args) {
+        String s = "NEZE ETTPMGEXMSRW EVI XCTMGEPPC GSQTMPIH XS FCXIGSHI XLEX GER VYR SR ERC NEZE ZMVXYEP QEGLMRI VIKEVHPIWW SJ XLI YRHIVPCMRK GSQTYXIV EVGLMXIGXYVI";
+        //String s = "CAD";//  не помню для чего добавлял - не потребовалась
+        String text = findText(s, 4); // для декодирования текста
+        //String text = hideText(s, 4); // для кодирования текста
+        System.out.println(text);
+        /*System.out.print(text.charAt(1-1));
+        System.out.print(text.charAt(8-1));
+        System.out.print(text.charAt(10-1));
+        System.out.print(text.charAt(11-1));
+        System.out.print(text.charAt(24-1));*/
+        //System.out.println(s1);
+
+    }
+
+    public static String hideText(String s, int k) {
+        String s1 ="";
+        char c ;
+        while (s.length()>0) {
+            c = s.charAt(0);
+            s1 =s1 + codeIn(c, k);
+            s = s.substring(1);
+        }
+        return s1;
+    }
+
+    public static String findText(String s, int k) {
+        String s1 ="";
+        char c ;
+        while (s.length()>0) {
+            c = s.charAt(0);
+            s1 =s1 + codeOut(c, k);
+            s = s.substring(1);
+        }
+        return s1;
+    }
+
+    public static int charToInt(char c) {
+        //перевод буквы в число(для одного символа)
+        int i = 0;
+        switch (c) {
+            case  ('A'):
+                i = 1;
+                break;
+            case ('B'):
+                i = 2;
+                break;
+            case ('C'):
+                i = 3;
+                break;
+            case ('D'):
+                i = 4;
+                break;
+            case ('E'):
+                i = 5;
+                break;
+            case ('F'):
+                i = 6;
+                break;
+            case ('G'):
+                i = 7;
+                break;
+            case ('H'):
+                i = 8;
+                break;
+            case ('I'):
+                i = 9;
+                break;
+            case ('J'):
+                i = 10;
+                break;
+            case ('K'):
+                i = 11;
+                break;
+            case ('L'):
+                i = 12;
+                break;
+            case ('M'):
+                i = 13;
+                break;
+            case ('N'):
+                i = 14;
+                break;
+            case ('O'):
+                i = 15;
+                break;
+            case ('P'):
+                i = 16;
+                break;
+            case ('Q'):
+                i = 17;
+                break;
+            case ('R'):
+                i = 18;
+                break;
+            case ('S'):
+                i = 19;
+                break;
+            case ('T'):
+                i = 20;
+                break;
+            case ('U'):
+                i = 21;
+                break;
+            case ('V'):
+                i = 22;
+                break;
+            case ('W'):
+                i = 23;
+                break;
+            case ('X'):
+                i = 24;
+                break;
+            case ('Y'):
+                i = 25;
+                break;
+            case ('Z'):
+                i = 26;
+                break;
+            case (' '):
+                i = 27;
+                break;
+            default:
+                System.out.println("Что-то пошло не так");
+                break;
+        }
+        return i;
+    }
+
+    public static String intToChar(int i) {
+        // перевод числа в букву(для одного символа)
+        String s = "";
+        switch (i) {
+            case  1:
+                s = "A";
+                break;
+            case  2:
+                s = "B";
+                break;
+            case  3:
+                s = "C";
+                break;
+            case  4:
+                s = "D";
+                break;
+            case  5:
+                s = "E";
+                break;
+            case  6:
+                s = "F";
+                break;
+            case  7:
+                s = "G";
+                break;
+            case  8:
+                s = "H";
+                break;
+            case  9:
+                s = "I";
+                break;
+            case  10:
+                s = "J";
+                break;
+            case  11:
+                s = "K";
+                break;
+            case  12:
+                s = "L";
+                break;
+            case  13:
+                s = "M";
+                break;
+            case  14:
+                s = "N";
+                break;
+            case  15:
+                s = "O";
+                break;
+            case  16:
+                s = "P";
+                break;
+            case  17:
+                s = "Q";
+                break;
+            case  18:
+                s = "R";
+                break;
+            case  19:
+                s = "S";
+                break;
+            case  20:
+                s = "T";
+                break;
+            case  21:
+                s = "U";
+                break;
+            case  22:
+                s = "V";
+                break;
+            case  23:
+                s = "W";
+                break;
+            case  24:
+                s = "X";
+                break;
+            case  25:
+                s = "Y";
+                break;
+            case  26:
+                s = "Z";
+                break;
+            case 27:
+                s = " ";
+                break;
+            default:
+                System.out.println("Что-то пошло не так");
+                break;
+        }
+        return s;
+    }
+
+    public static int useKeyIn(int i, int k) {
+        if (i != 27) {
+            i += k;
+            i %= 26;
+        }
+        return i;
+    }
+
+    public static int useKeyOut(int i, int k) {
+        if (i != 27) {
+            i -= k;
+            if (i<1) {
+                i +=26;
+            } else {
+                i %= 26;
+            }
+        }
+        return i;
+    }
+
+    public static String codeIn(char c, int k) {//замена символов в соответствии с ключом кода цезаря
+        String s = "";
+        int i = 0;
+        i = charToInt(c);
+        i = useKeyIn(i, k);
+        s = intToChar(i);
+        return s;
+    }
+
+    public static String codeOut(char c, int k) {//замена символов в соответствии с ключом кода цезаря
+        String s = "";
+        int i = 0;
+        i = charToInt(c);
+        i = useKeyOut(i, k);
+        s = intToChar(i);
+        return s;
+    }
+}
